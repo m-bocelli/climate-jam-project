@@ -65,7 +65,8 @@ public class PlayerInteractionTrigger : MonoBehaviour
             timer = 0;
             captureSlider.value = 0;
             captureSliderGameObject.SetActive(false);
-            Destroy(other.gameObject);
+
+            other.GetComponent<Island>().RemoveIsland();
         }
         else  if (other.gameObject.tag == "IslandMedium")
         {
@@ -77,7 +78,8 @@ public class PlayerInteractionTrigger : MonoBehaviour
             timer = 0;
             captureSlider.value = 0;
             captureSliderGameObject.SetActive(false);
-            Destroy(other.gameObject);
+
+            other.GetComponent<Island>().RemoveIsland();
         }
         else if (other.gameObject.tag == "IslandLarge")
         {
@@ -89,7 +91,8 @@ public class PlayerInteractionTrigger : MonoBehaviour
             timer = 0;
             captureSlider.value = 0;
             captureSliderGameObject.SetActive(false);
-            Destroy(other.gameObject);
+
+            other.GetComponent<Island>().RemoveIsland();
         }
     }
 
