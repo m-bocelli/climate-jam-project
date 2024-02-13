@@ -22,6 +22,7 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         //rb = this.gameObject.GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame
@@ -39,7 +40,7 @@ public class EnemyScript : MonoBehaviour
     public void ReduceHealth(float damage)
     {
         health -= damage;
-        if(health < 0)
+        if(health <= 0)
         {
             Destroy(this.gameObject);
         }

@@ -4,6 +4,8 @@ public class ProceduralTileGeneration : MonoBehaviour
 {
     [SerializeField] ProceduralTileGeneration instance;
     [SerializeField] GameObject[] islands;
+
+    [SerializeField] Collider seaCollider;
     [SerializeField] int islandTotal;
     [SerializeField] float mapSize;
 
@@ -35,7 +37,7 @@ public class ProceduralTileGeneration : MonoBehaviour
         }
 
         islandCount = 0;
-        while(islandCount <= islandTotal)
+        while(islandCount < islandTotal)
         {
             float xPos = Random.Range(-mapSize, mapSize);
             float yPos = Random.Range(-mapSize, mapSize);
@@ -45,15 +47,22 @@ public class ProceduralTileGeneration : MonoBehaviour
 
             if (rng <= 40)
             {
-                Instantiate(islands[0], randomPos, Quaternion.identity, transform);
+                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[0], "Landform");
+                Instantiate(islands[0], spawnPos, Quaternion.identity, transform);
             }
             else if (rng <= 60)
             {
-                Instantiate(islands[1], randomPos, Quaternion.identity, transform);
+                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[1], "Landform");
+                Instantiate(islands[1], spawnPos, Quaternion.identity, transform);
             }
-            else
+            else if (rng <= 80)
             {
-                Instantiate(islands[2], randomPos, Quaternion.identity, transform);
+                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[2], "Landform");
+                Instantiate(islands[2], spawnPos, Quaternion.identity, transform);
+            } else
+            {
+                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[3], "Landform");
+                Instantiate(islands[3], spawnPos, Quaternion.identity, transform);
             }
             //Debug.Log("islandCount: " + islandCount);
             islandCount++;

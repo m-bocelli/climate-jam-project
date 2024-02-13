@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7132848169691214472}
   - component: {fileID: 5680747195009266845}
   - component: {fileID: 8686053741718577819}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: IslandSmall
   m_TagString: IslandSmall
   m_Icon: {fileID: 0}
@@ -29,12 +29,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5078125570091974845}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.7, y: 0.16, z: 24.1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 10, y: 1, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3954837166959790261
 MeshFilter:
@@ -119,6 +119,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 748a16297e530f94cbf6ea29b5add640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  islandSize: 0
+  islandersOnIsland: 3
+  bc: {fileID: 7132848169691214472}
+  islanderPrefab: {fileID: 5268958140972249149, guid: 5f683169c30681f44845d93d932dece7,
+    type: 3}
+  islanderOffset: {x: 0, y: 5, z: 0}
+  islanders: []
 --- !u!54 &8686053741718577819
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -144,5 +151,5 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0

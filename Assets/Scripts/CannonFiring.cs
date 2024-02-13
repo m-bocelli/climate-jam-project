@@ -14,6 +14,7 @@ public class CannonFiring : MonoBehaviour
     [SerializeField]
     private float timeToReload;
 
+    [SerializeField] int cannonDamage = 10;
     private int numOfCannons;
     private bool readyToShoot;
     private float time;
@@ -59,6 +60,7 @@ public class CannonFiring : MonoBehaviour
         {
             GameObject newCannonBall = Instantiate(cannonBall, attackPoint.position, Quaternion.identity);
             newCannonBall.GetComponent<Rigidbody>().AddForce(force * attackPoint.forward, ForceMode.Impulse);
+            newCannonBall.GetComponent<CannonBall>().Damage = cannonDamage;
             Destroy(newCannonBall, 3f);
         }
 

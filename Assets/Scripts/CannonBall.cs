@@ -7,6 +7,8 @@ public class CannonBall : MonoBehaviour
     [SerializeField]
     private float damage;
 
+    public float Damage { get { return damage; } set { damage = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
