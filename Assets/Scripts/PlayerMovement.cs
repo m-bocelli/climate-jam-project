@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] float _velocityIncreaseRate = 1.25f;
     [SerializeField] float _velocityDecreaseRate = .3f;
 
+    [SerializeField] Rigidbody rb;
+
     private bool anchor;
     private float moveSpeed;
     private float rotateSpeed;
@@ -34,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             anchor = !anchor;
+            if (anchor) rb.velocity = Vector3.zero;
             if (anchor) moveSpeed = _minThrottleSpeed;
         }
 

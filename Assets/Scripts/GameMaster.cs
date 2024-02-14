@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMaster : MonoBehaviour
 {
@@ -12,6 +13,11 @@ public class GameMaster : MonoBehaviour
         {
             instance = this;
         }
+    }
+
+    public void GoToScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 
     public Vector3 GetRandomPointInCollider(Collider collider, Vector3 offset)

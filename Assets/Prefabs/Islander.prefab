@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5307339877573903571}
   - component: {fileID: 8665074800829557695}
+  - component: {fileID: 7301828337929517613}
   m_Layer: 6
   m_Name: Islander
   m_TagString: Untagged
@@ -54,6 +55,22 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7301828337929517613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268958140972249149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0af9ca910eef9674a95a81f86d6c998f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  island: {fileID: 0}
+  playerTarget: {fileID: 0}
+  travelSpeed: 5
+  deleteRange: 1
 --- !u!1 &5862457269444312166
 GameObject:
   m_ObjectHideFlags: 0
@@ -65,7 +82,6 @@ GameObject:
   - component: {fileID: 23871209845258924}
   - component: {fileID: 4704961623061312151}
   - component: {fileID: 6687920255093008666}
-  - component: {fileID: 4761558104182151614}
   m_Layer: 6
   m_Name: Capsule
   m_TagString: Untagged
@@ -138,26 +154,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &4761558104182151614
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5862457269444312166}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}

@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     private float timeForInvincibility;
     private float time;
 
+    public float Health { get { return health; } }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class PlayerHealth : MonoBehaviour
             if(health <= 0)
             {
                 Debug.Log("You Lose!");
+                GameMaster.instance.GoToScene("GameOver");
             }
             else
             {
