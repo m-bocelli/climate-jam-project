@@ -1,16 +1,37 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster instance;
+
+    [SerializeField]
+    private float endTime;
+    [SerializeField]
+    private Slider timeSlider;
+    private float timer;
+
 
     private void Awake()
     {
         if(instance == null)
         {
             instance = this;
+        }
+    }
+
+    private void Update()
+    {
+        if (instance == null) return;
+
+        timer += Time.deltaTime;
+        timeSlider.value = timer / endTime;
+
+        if(timer >= endTime)
+        {
+            Debug.Log("Game Ended");
         }
     }
 

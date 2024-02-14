@@ -112,4 +112,16 @@ public class PlayerMovement : MonoBehaviour
     {
         return anchor;
     }
+
+    public void IncreaseSpeed(float increasedSpeed)
+    {
+        moveSpeed *= increasedSpeed;
+        _maxThrottleSpeed *= increasedSpeed;
+    }
+
+    public void DecreaseSpeed(float decreaseSpeed)
+    {
+        moveSpeed /= decreaseSpeed;
+        _maxThrottleSpeed /= decreaseSpeed;
+    }
 }

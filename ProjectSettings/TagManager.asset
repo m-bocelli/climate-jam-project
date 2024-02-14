@@ -8,6 +8,8 @@ TagManager:
   - IslandMedium
   - IslandLarge
   - Enemy
+  - OilRig
+  - Oil
   layers:
   - Default
   - TransparentFX
