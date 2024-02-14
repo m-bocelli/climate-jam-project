@@ -7,7 +7,6 @@ public class ProceduralTileGeneration : MonoBehaviour
 
     [SerializeField] Collider seaCollider;
     [SerializeField] int islandTotal;
-    [SerializeField] float mapSize;
 
     int islandCount;
 
@@ -39,9 +38,6 @@ public class ProceduralTileGeneration : MonoBehaviour
         islandCount = 0;
         while(islandCount < islandTotal)
         {
-            float xPos = Random.Range(-mapSize, mapSize);
-            float yPos = Random.Range(-mapSize, mapSize);
-            Vector3 randomPos = new Vector3(xPos, transform.position.y, yPos);
 
             int rng = Random.Range(0, 100);
 
@@ -55,14 +51,10 @@ public class ProceduralTileGeneration : MonoBehaviour
                 Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[1], "Landform");
                 Instantiate(islands[1], spawnPos, Quaternion.identity, transform);
             }
-            else if (rng <= 80)
+            else
             {
                 Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[2], "Landform");
                 Instantiate(islands[2], spawnPos, Quaternion.identity, transform);
-            } else
-            {
-                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[3], "Landform");
-                Instantiate(islands[3], spawnPos, Quaternion.identity, transform);
             }
             //Debug.Log("islandCount: " + islandCount);
             islandCount++;

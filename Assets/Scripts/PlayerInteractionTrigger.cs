@@ -55,54 +55,12 @@ public class PlayerInteractionTrigger : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag == "IslandSmall")
-        {
-            timer += Time.deltaTime * crewManager.GetCrewNum();
-            captureSliderGameObject.SetActive(true);
-            captureSlider.value = timer / timeToCaptureSmallIsland;
-            if (timer <= timeToCaptureSmallIsland) return;
-            crewManager.IncreaseCrewNum(Random.Range(smallIslandMinCrewGain, smallIslandMaxCrewGain));
-            timer = 0;
-            captureSlider.value = 0;
-            captureSliderGameObject.SetActive(false);
 
-            other.GetComponent<Island>().RemoveIsland();
-        }
-        else  if (other.gameObject.tag == "IslandMedium")
+        if (other.gameObject.tag == "IslandMedium")
         {
-            timer += Time.deltaTime * crewManager.GetCrewNum();
-            captureSliderGameObject.SetActive(true);
-            captureSlider.value = timer / timeToCaptureMediumIsland;
-            if (timer <= timeToCaptureMediumIsland) return;
-            crewManager.IncreaseCrewNum(Random.Range(mediumIslandMinCrewGain, mediumIslandMaxCrewGain));
-            timer = 0;
-            captureSlider.value = 0;
-            captureSliderGameObject.SetActive(false);
-
-            other.GetComponent<Island>().RemoveIsland();
-        }
-        else if (other.gameObject.tag == "IslandLarge")
-        {
-            timer += Time.deltaTime * crewManager.GetCrewNum();
-            captureSliderGameObject.SetActive(true);
-            captureSlider.value = timer / timeToCaptureLargeIsland;
-            if (timer <= timeToCaptureLargeIsland) return;
-            crewManager.IncreaseCrewNum(Random.Range(largeIslandMinCrewGain, largeIslandMaxCrewGain));
-            timer = 0;
-            captureSlider.value = 0;
-            captureSliderGameObject.SetActive(false);
-
-            other.GetComponent<Island>().RemoveIsland();
+            Island island = other.GetComponent<Island>();
+            island.RemoveIslanders(gameObject);
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if(other.gameObject.tag == "IslandSmall" || other.gameObject.tag == "IslandMedium" || other.gameObject.tag == "IslandLarge")
-        {
-            timer = 0;
-            captureSlider.value = 0;
-            captureSliderGameObject.SetActive(false);
-        }
-    }
 }
