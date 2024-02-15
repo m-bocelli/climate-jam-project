@@ -31,6 +31,7 @@ public class Island : MonoBehaviour
         Collider collider = gameObject.GetComponent<Collider>();
         GameObject islander = Instantiate(islanderPrefab, GameMaster.instance.GetRandomSpawnPos(collider, islanderOffset, islanderPrefab, "Islander"), Quaternion.identity);
         islander.GetComponent<Islander>().Island = this.gameObject;
+        GameMaster.instance.totalIslanders++;
         return islander;
     }
 

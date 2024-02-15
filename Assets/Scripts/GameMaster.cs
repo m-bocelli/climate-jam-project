@@ -6,7 +6,14 @@ using UnityEngine.SceneManagement;
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster instance;
+
+    public int savedIslanderCount = 0;
+    public int totalIslanders = 0;
+
     bool m_Started;
+
+    public int TotalIslanders { get { return totalIslanders; } set { totalIslanders = value; } }
+    public int SavedIslanderCount { get { return savedIslanderCount; } set { savedIslanderCount = value; } }
 
     private void Awake()
     {
@@ -92,6 +99,22 @@ public class GameMaster : MonoBehaviour
         }
 
         return spawnPos;
+    }
+
+    public void GivePlayerUpgrade(GameObject player)
+    {
+        int rng = Random.Range(0, 2);
+        PlayerMovement playerMovement = player.GetComponentInParent<PlayerMovement>();
+        Debug.Log(playerMovement);
+        switch (rng)
+        {
+            case 0:
+                playerMovement.ForwardSpeedMultiplier += 0.1f;
+                break;
+            case 1:
+                playerMovement.RotationSpeedMultiplier += 0.1f;
+                break;
+        }
     }
 
 }

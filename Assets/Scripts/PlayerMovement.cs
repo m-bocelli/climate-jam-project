@@ -18,6 +18,12 @@ public class PlayerMovement : MonoBehaviour
     private float rotateSpeed;
     private float currentDirection;
 
+    [SerializeField] float forwardSpeedMultiplier = 1f;
+    [SerializeField] float rotationSpeedMultiplier = 1f;
+
+    public float ForwardSpeedMultiplier { get { return forwardSpeedMultiplier; } set { forwardSpeedMultiplier = value; } }
+    public float RotationSpeedMultiplier { get { return rotationSpeedMultiplier; } set { rotationSpeedMultiplier = value; } }
+
     void Awake()
     {
         moveSpeed = _minThrottleSpeed;
@@ -56,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Move Ship If Not Anchored
         //Vector3 movementDir = new(0f, 0f, Input.GetAxisRaw("Vertical"));
-        transform.Translate(new Vector3(0f, 0f, currentDirection) * moveSpeed * Time.deltaTime);
+        transform.Translate(new Vector3(0f, 0f, currentDirection) * moveSpeed * forwardSpeedMultiplier * Time.deltaTime);
 
         //Increase Velocity The Longer We Hold Down Input
         if(Input.GetAxisRaw("Vertical") > 0f)
@@ -81,7 +87,7 @@ public class PlayerMovement : MonoBehaviour
     {
         //Turn Ship
         Vector3 rotateDir = new(0f, Input.GetAxisRaw("Horizontal"), 0f);
-        transform.Rotate(rotateDir * rotateSpeed * Time.deltaTime);
+        transform.Rotate(rotateDir * rotateSpeed * rotationSpeedMultiplier * Time.deltaTime);
 
         //Decrease Turn Speed The Faster We Go
         if(moveSpeed != _minThrottleSpeed)

@@ -40,7 +40,7 @@ public class ProceduralTileGeneration : MonoBehaviour
         {
 
             int rng = Random.Range(0, 100);
-            Vector3 offset = new Vector3(-8,-8);
+            Vector3 offset = new Vector3(-8,0,-8);
             if (rng <= 40)
             {
                 Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, offset, islands[0], "Landform");

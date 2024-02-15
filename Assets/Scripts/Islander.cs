@@ -38,6 +38,8 @@ public class Islander : MonoBehaviour
 
             if(Vector3.Distance(transform.position, playerTarget.transform.position) < deleteRange)
             {
+                GameMaster.instance.savedIslanderCount++;
+                GameMaster.instance.GivePlayerUpgrade(playerTarget);
                 Destroy(gameObject);
             }
         }
