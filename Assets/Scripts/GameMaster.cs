@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster instance;
+    bool m_Started;
 
     private void Awake()
     {
@@ -13,6 +14,7 @@ public class GameMaster : MonoBehaviour
         {
             instance = this;
         }
+        m_Started = true;
     }
 
     public void GoToScene(string sceneName)
@@ -33,25 +35,42 @@ public class GameMaster : MonoBehaviour
         return islanderPos;
     }
 
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        //Check that it is being run in Play Mode, so it doesn't try to draw this in Editor mode
+        if (m_Started)
+            //Draw a cube where the OverlapBox is (positioned where your GameObject is as well as a size)
+            Gizmos.DrawWireCube(transform.position, transform.localScale);
+    }
+
     public Vector3 GetRandomSpawnPos(Collider islandCollider, Vector3 offset, GameObject objectToSpawn, string layerMaskName)
     {
         Vector3 spawnPos = Vector3.zero;
         bool validSpawn = false;
         int attemptCount = 0;
-        int maxAttempts = 0;
+        int maxAttempts = 200;
 
         int noSpawnLayer = LayerMask.NameToLayer(layerMaskName);
+
+        Debug.Log("hmm");
 
         while (!validSpawn && attemptCount <= maxAttempts)
         {
             spawnPos = GetRandomPointInCollider(islandCollider, offset);
-            Collider[] colliders = Physics.OverlapBox(spawnPos, objectToSpawn.transform.localScale, Quaternion.identity, noSpawnLayer);
+            Collider[] colliders = Physics.OverlapSphere(spawnPos, 50f);
+
+            Debug.Log("collidersGiven: " + colliders);
+
+            //Gizmos.color = Color.yellow;
+            //Gizmos.DrawWireCube(transform.position, objectToSpawn.transform.localScale);
 
             bool isInvalidCollision = false;
             foreach (Collider collider in colliders)
             {
                 if (collider.gameObject.layer == noSpawnLayer)
                 {
+                    Debug.Log("INVALID COLLISION DETECTED");
                     isInvalidCollision = true;
                     break;
                 }
@@ -64,6 +83,12 @@ public class GameMaster : MonoBehaviour
                 Debug.Log("Failed to Spawn.. Attempt: " + attemptCount);
             }
             attemptCount++;
+        }
+
+
+        if (attemptCount >= maxAttempts)
+        {
+            Debug.Log("max attempts reached..");
         }
 
         return spawnPos;

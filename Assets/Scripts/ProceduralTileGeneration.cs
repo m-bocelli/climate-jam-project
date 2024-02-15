@@ -40,20 +40,20 @@ public class ProceduralTileGeneration : MonoBehaviour
         {
 
             int rng = Random.Range(0, 100);
-
+            Vector3 offset = new Vector3(-8,-8);
             if (rng <= 40)
             {
-                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[0], "Landform");
+                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, offset, islands[0], "Landform");
                 Instantiate(islands[0], spawnPos, Quaternion.identity, transform);
             }
             else if (rng <= 60)
             {
-                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[1], "Landform");
+                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, offset, islands[1], "Landform");
                 Instantiate(islands[1], spawnPos, Quaternion.identity, transform);
             }
             else
             {
-                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, Vector3.zero, islands[2], "Landform");
+                Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, offset, islands[2], "Landform");
                 Instantiate(islands[2], spawnPos, Quaternion.identity, transform);
             }
             //Debug.Log("islandCount: " + islandCount);

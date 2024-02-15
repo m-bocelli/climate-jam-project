@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5307339877573903571}
   - component: {fileID: 8665074800829557695}
   - component: {fileID: 7301828337929517613}
+  - component: {fileID: 4979735498882262548}
   m_Layer: 6
   m_Name: Islander
   m_TagString: Untagged
@@ -71,6 +72,29 @@ MonoBehaviour:
   playerTarget: {fileID: 0}
   travelSpeed: 5
   deleteRange: 1
+--- !u!136 &4979735498882262548
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5268958140972249149}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 1
+  m_Height: 3
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &5862457269444312166
 GameObject:
   m_ObjectHideFlags: 0

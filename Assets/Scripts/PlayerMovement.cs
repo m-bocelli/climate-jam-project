@@ -47,6 +47,9 @@ public class PlayerMovement : MonoBehaviour
 
         Turn();
         Rock();
+
+        //Make sure player doesn't go anywhere on the y Axis.
+        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
     }
 
     void Move()

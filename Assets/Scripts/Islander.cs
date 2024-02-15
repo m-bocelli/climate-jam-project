@@ -9,11 +9,14 @@ public class Islander : MonoBehaviour
 
     [SerializeField] float travelSpeed;
     [SerializeField] float deleteRange;
-     
+
+    public GameObject Island { get { return island; } set { island = value; } }
+
     // Start is called before the first frame update
     void Start()
     {
-        travelSpeed *= Random.Range(2f, 5f); 
+        travelSpeed *= Random.Range(2f, 5f);
+        transform.parent = island.gameObject.transform;
     }
 
     public void SetPlayerTarget(GameObject target)

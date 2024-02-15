@@ -30,6 +30,7 @@ public class Island : MonoBehaviour
     {
         Collider collider = gameObject.GetComponent<Collider>();
         GameObject islander = Instantiate(islanderPrefab, GameMaster.instance.GetRandomSpawnPos(collider, islanderOffset, islanderPrefab, "Islander"), Quaternion.identity);
+        islander.GetComponent<Islander>().Island = this.gameObject;
         return islander;
     }
 
@@ -44,7 +45,7 @@ public class Island : MonoBehaviour
 
     public void RemoveIslanders(GameObject player)
     {
-        Debug.Log("Remove Islanders called");
+        //Debug.Log("Remove Islanders called");
         StartCoroutine(RemoveOneIslander(player));
     }
 
@@ -52,15 +53,15 @@ public class Island : MonoBehaviour
     {
         float rngWaitTime = Random.Range(0.1f, 1f);
         yield return new WaitForSeconds(rngWaitTime);
-        Debug.Log("picking random islander to remove...");
+        //Debug.Log("picking random islander to remove...");
         if (islanders.Count <= 0) yield break;
         int rngIdx = Random.Range(0, islanders.Count);
         GameObject randomIslander = islanders[rngIdx];
-        Debug.Log("I choose this Islander!! " + randomIslander.gameObject.transform);
+        //Debug.Log("I choose this Islander!! " + randomIslander.gameObject.transform);
 
         Islander randomIslanderScript = randomIslander.GetComponent<Islander>();
         randomIslanderScript.SetPlayerTarget(player);
-        Debug.Log("target: " + randomIslanderScript.GetPlayerTarget());
+        //Debug.Log("target: " + randomIslanderScript.GetPlayerTarget());
         islanders.RemoveAt(rngIdx);
         RemoveIslanders(player);
     }

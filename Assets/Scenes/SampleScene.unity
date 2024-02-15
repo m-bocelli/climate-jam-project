@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2792,7 +2792,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1709815690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2966,7 +2966,7 @@ MonoBehaviour:
   - {fileID: 6712434412137805876, guid: 8d2e6b345c4795248b3b9550ef8f5421, type: 3}
   - {fileID: 1549544124768479871, guid: 3ececaa99f36be8419f454624d8947e9, type: 3}
   seaCollider: {fileID: 552591272}
-  islandTotal: 100
+  islandTotal: 12
 --- !u!4 &1824781225
 Transform:
   m_ObjectHideFlags: 0
@@ -3157,6 +3157,7 @@ MonoBehaviour:
   _maxThrottleSpeed: 30
   _velocityIncreaseRate: 1.0025
   _velocityDecreaseRate: 0.995
+  rb: {fileID: 1915862809}
 --- !u!4 &1915862805
 Transform:
   m_ObjectHideFlags: 0
