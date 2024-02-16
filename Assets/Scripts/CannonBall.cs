@@ -26,7 +26,12 @@ public class CannonBall : MonoBehaviour
         if(collision.gameObject.tag == "Enemy")
         {
             collision.gameObject.GetComponent<EnemyScript>().ReduceHealth(damage);
-            Debug.Log("Hit!");
+            Destroy(gameObject);
+        }
+
+        if (collision.gameObject.tag == "OilRig")
+        {
+            collision.gameObject.GetComponent<OilRigScript>().ReduceHealth(damage);
             Destroy(gameObject);
         }
     }

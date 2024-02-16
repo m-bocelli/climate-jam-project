@@ -5,10 +5,16 @@ public class ProceduralTileGeneration : MonoBehaviour
     [SerializeField] ProceduralTileGeneration instance;
     [SerializeField] GameObject[] islands;
 
+
+    [SerializeField] GameObject oilRigPrefab;
+    private GameObject[] oilRigs;
+
     [SerializeField] Collider seaCollider;
     [SerializeField] int islandTotal;
+    [SerializeField] int oilRigTotal;
 
     int islandCount;
+    int oilRigCount;
 
     void Awake () 
     {
@@ -18,6 +24,7 @@ public class ProceduralTileGeneration : MonoBehaviour
     private void Start()
     {
         GenerateIslands(islandTotal);
+        GenerateOilRigs(oilRigTotal);
     }
 
     void Update()
@@ -58,6 +65,18 @@ public class ProceduralTileGeneration : MonoBehaviour
             }
             //Debug.Log("islandCount: " + islandCount);
             islandCount++;
+        }
+    }
+
+    void GenerateOilRigs(int oilRigTotal)
+    {
+        oilRigCount = 0;
+        while (oilRigCount < oilRigTotal)
+        {
+            Vector3 offset = new Vector3(-8, 0, -8);
+            Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, offset, oilRigPrefab, "Landform");
+            Instantiate(oilRigPrefab, spawnPos, Quaternion.identity, transform);
+            oilRigCount++;
         }
     }
 

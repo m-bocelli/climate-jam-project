@@ -50,7 +50,7 @@ public class PlayerInteractionTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerStay(Collider other)
@@ -60,7 +60,30 @@ public class PlayerInteractionTrigger : MonoBehaviour
         {
             Island island = other.GetComponent<Island>();
             island.RemoveIslanders(gameObject);
+
+        }
+        else if (other.gameObject.tag == "Oil")
+        {
+            timer += Time.deltaTime * crewManager.GetCrewNum();
+            captureSliderGameObject.SetActive(true);
+            captureSlider.value = timer / other.gameObject.GetComponent<OilSpillScript>().GetTimeToCapture();
+            if (timer <= other.gameObject.GetComponent<OilSpillScript>().GetTimeToCapture()) return;
+            other.gameObject.GetComponent<OilSpillScript>().RemoveOilSpill();
+            timer = 0;
+            captureSlider.value = 0;
+            captureSliderGameObject.SetActive(false);
+
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "IslandSmall" || other.gameObject.tag == "IslandMedium" || other.gameObject.tag == "IslandLarge" ||
+            other.gameObject.tag == "Oil")
+        {
+            timer = 0;
+            captureSlider.value = 0;
+            captureSliderGameObject.SetActive(false);
+        }
+    }
 }

@@ -2,10 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameMaster : MonoBehaviour
 {
     public static GameMaster instance;
+
+    [SerializeField]
+    private float endTime;
+    [SerializeField]
+    private Slider timeSlider;
+    private float timer;
 
     public int savedIslanderCount = 0;
     public int totalIslanders = 0;
@@ -23,6 +30,20 @@ public class GameMaster : MonoBehaviour
         }
         m_Started = true;
     }
+
+    private void Update()
+    {
+        if (instance == null) return;
+
+        timer += Time.deltaTime;
+        timeSlider.value = timer / endTime;
+
+        if (timer >= endTime)
+        {
+            Debug.Log("Game Ended");
+        }
+    }
+
 
     public void GoToScene(string sceneName)
     {
