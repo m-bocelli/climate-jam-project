@@ -86,7 +86,8 @@ public class GameMaster : MonoBehaviour
         while (!validSpawn && attemptCount <= maxAttempts)
         {
             spawnPos = GetRandomPointInCollider(islandCollider, offset);
-            Collider[] colliders = Physics.OverlapSphere(spawnPos, 50f);
+            //Collider[] colliders = Physics.OverlapSphere(spawnPos, 50f);
+            Collider[] colliders = Physics.OverlapBox(spawnPos, objectToSpawn.transform.localScale / 2, Quaternion.identity);
 
             Debug.Log("collidersGiven: " + colliders);
 
@@ -136,6 +137,8 @@ public class GameMaster : MonoBehaviour
                 playerMovement.RotationSpeedMultiplier += 0.1f;
                 break;
         }
+
+        player.GetComponentInParent<CrewManager>().IncreaseCrewNum(1);
     }
 
 }

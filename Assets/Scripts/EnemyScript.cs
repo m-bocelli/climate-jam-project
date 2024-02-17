@@ -11,6 +11,7 @@ public class EnemyScript : MonoBehaviour
     private float speed;
     [SerializeField]
     private float damage;
+    [SerializeField] GameObject dropItem;
 
     //private Rigidbody rb;
 
@@ -40,6 +41,7 @@ public class EnemyScript : MonoBehaviour
     public void ReduceHealth(float damage)
     {
         health -= damage;
+        Instantiate(dropItem, transform.position, Quaternion.identity);
         if(health <= 0)
         {
             Destroy(this.gameObject);

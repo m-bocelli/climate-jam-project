@@ -149,4 +149,6 @@ MonoBehaviour:
   health: 60
   speed: 5
   damage: 20
+  dropItem: {fileID: 8581203132368262659, guid: e2df93e71c85aa94a8368496a74dba33,
+    type: 3}
   player: {fileID: 0}

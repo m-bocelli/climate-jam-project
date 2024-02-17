@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Camera))]
@@ -9,17 +10,30 @@ public class CameraController : MonoBehaviour
     [SerializeField, Range(0f, 1f)] float _focusCentering = 0.5f;
     private Vector3 _focusPos;
 
+    public float smoothing;
+    public float rotSmoothing;
+
+
     private void Awake() 
     {
         _focusPos = _playerTransform.position;
     }
 
-    private void LateUpdate() 
+    private void FixedUpdate() 
     {
-        UpdateFocusPos();
-        MoveToFocus();
+        _focusPos = new Vector3(_playerTransform.position.x, 6f,_playerTransform.position.z);
+        Vector3 lookDir = transform.forward;
+        Vector3 targetPos = _focusPos - lookDir * _distanceFromPlayer;
+
+        transform.position = Vector3.Lerp(transform.position, targetPos, smoothing);
+        transform.rotation = Quaternion.Slerp(transform.rotation, _playerTransform.rotation, rotSmoothing);
+        transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f));
+        Debug.Log("Setting camera pos to : " + transform.position + " : playerPos:" + _playerTransform.position);
+       // UpdateFocusPos();
+       // MoveToFocus();
     }
 
+    /*
     private void UpdateFocusPos()
     {
         Vector3 targetPos = _playerTransform.position;
@@ -37,4 +51,5 @@ public class CameraController : MonoBehaviour
         Vector3 lookDir = transform.forward;
         transform.position = _focusPos - lookDir * _distanceFromPlayer;
     }
+    */
 }
