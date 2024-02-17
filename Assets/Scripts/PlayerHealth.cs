@@ -9,8 +9,12 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField]
     private float timeForInvincibility;
     private float time;
+    [SerializeField] Animator anim;
+
 
     public float Health { get { return health; } }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +44,7 @@ public class PlayerHealth : MonoBehaviour
             else
             {
                 Debug.Log("Health: " + health);
+                anim.Play("ship_hit_back");
             }
             time = 0;
         }

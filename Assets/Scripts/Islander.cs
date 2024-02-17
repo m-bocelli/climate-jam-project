@@ -10,6 +10,11 @@ public class Islander : MonoBehaviour
     [SerializeField] float travelSpeed;
     [SerializeField] float deleteRange;
 
+    [SerializeField] Collider bc;
+    float extraRaycastHeight = 0.05f;
+    [SerializeField] LayerMask groundMask;
+    [SerializeField] bool touchingGround = false;
+
     public GameObject Island { get { return island; } set { island = value; } }
 
     // Start is called before the first frame update
@@ -34,8 +39,19 @@ public class Islander : MonoBehaviour
     {
         if(playerTarget != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, playerTarget.transform.position, Time.deltaTime * travelSpeed);
+            RaycastHit hit;
+            Color rayColor = Color.red;
+            Vector3 targetPos = playerTarget.transform.position;
+            bool hitGround = Physics.Raycast(bc.bounds.center, -Vector2.up, out hit, bc.bounds.extents.y + extraRaycastHeight, groundMask);
 
+            if(hitGround)
+            {
+                targetPos = new Vector3(playerTarget.transform.position.x, 8f, playerTarget.transform.position.z);
+                rayColor = Color.green;
+            }
+            Debug.DrawRay(bc.bounds.center, -Vector2.up * (bc.bounds.extents.y + extraRaycastHeight), rayColor);
+
+            transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.deltaTime * travelSpeed);
             if(Vector3.Distance(transform.position, playerTarget.transform.position) < deleteRange)
             {
                 GameMaster.instance.savedIslanderCount++;
@@ -43,5 +59,15 @@ public class Islander : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    void DetectGround()
+    {
+
+    }
+
+    void FollowPlayer()
+    {
+
     }
 }

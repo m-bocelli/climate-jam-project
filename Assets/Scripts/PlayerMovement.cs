@@ -4,18 +4,14 @@ using UnityEngine.EventSystems;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    [SerializeField] float _maxRotationSpeed = 50f;
-    [SerializeField] float _minRotationSpeed = 15f;
-    [SerializeField] float _minThrottleSpeed = 5f;
-    [SerializeField] float _maxThrottleSpeed = 30f;
+    [SerializeField] float moveSpeed = 5;
+    [SerializeField] float turnSpeed = 5;
     [SerializeField] float _velocityIncreaseRate = 1.25f;
     [SerializeField] float _velocityDecreaseRate = .3f;
 
     [SerializeField] Rigidbody rb;
 
     private bool anchor;
-    private float moveSpeed;
-    private float rotateSpeed;
     private float currentDirection;
 
     [SerializeField] float forwardSpeedMultiplier = 1f;
@@ -26,86 +22,57 @@ public class PlayerMovement : MonoBehaviour
 
     void Awake()
     {
-        moveSpeed = _minThrottleSpeed;
-        rotateSpeed = _maxRotationSpeed;
         currentDirection = 1f;
         anchor = true;
     }
 
     void Update()
     {
-        if (Input.GetAxisRaw("Vertical") != 0 && moveSpeed == _minThrottleSpeed)
-        {
-            currentDirection = Input.GetAxisRaw("Vertical");
-        }
-
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             anchor = !anchor;
             if (anchor) rb.velocity = Vector3.zero;
-            if (anchor) moveSpeed = _minThrottleSpeed;
+           // if (anchor) moveSpeed = _minThrottleSpeed;
         }
 
         if (!anchor)
         {
             Move();
         }
+        */
 
+        Move();
         Turn();
         Rock();
 
         //Make sure player doesn't go anywhere on the y Axis.
-        transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
+       // transform.position = new Vector3(transform.position.x, 0f, transform.position.z);
     }
 
     void Move()
     {
         //Move Ship If Not Anchored
         //Vector3 movementDir = new(0f, 0f, Input.GetAxisRaw("Vertical"));
-        transform.Translate(new Vector3(0f, 0f, currentDirection) * moveSpeed * forwardSpeedMultiplier * Time.deltaTime);
+        //rb.velocity = new Vector3(0f, 0f, currentDirection) * moveSpeed * forwardSpeedMultiplier * Time.deltaTime;
+        float vert = Input.GetAxis("Vertical");
+        rb.AddRelativeForce(Vector3.forward * vert * moveSpeed * forwardSpeedMultiplier * Time.deltaTime);
+        //rb.velocity = Vector3.forward * moveSpeed * forwardSpeedMultiplier * Time.deltaTime;
+        Debug.Log("rb vel: " + rb.velocity);
 
-        //Increase Velocity The Longer We Hold Down Input
-        if(Input.GetAxisRaw("Vertical") > 0f)
-        {
-            moveSpeed *= _velocityIncreaseRate;
-            if(moveSpeed > _maxThrottleSpeed)
-            {
-                moveSpeed = _maxThrottleSpeed;
-            }
-        }
-        else
-        {
-            moveSpeed *= _velocityDecreaseRate;
-            if (moveSpeed < _minThrottleSpeed)
-            {
-                moveSpeed = _minThrottleSpeed;
-            }
-        }
+        Vector3 localVelocity = transform.InverseTransformDirection(rb.velocity);
+        localVelocity.x = 0;
+        rb.velocity = transform.TransformDirection(localVelocity);
     }
 
     void Turn()
     {
         //Turn Ship
-        Vector3 rotateDir = new(0f, Input.GetAxisRaw("Horizontal"), 0f);
-        transform.Rotate(rotateDir * rotateSpeed * rotationSpeedMultiplier * Time.deltaTime);
+        Vector3 rotateDir = new Vector3(0f, Input.GetAxisRaw("Horizontal"), 0f);
+        rb.AddRelativeTorque(rotateDir * turnSpeed * rotationSpeedMultiplier * Time.deltaTime, ForceMode.VelocityChange);
 
-        //Decrease Turn Speed The Faster We Go
-        if(moveSpeed != _minThrottleSpeed)
-        {
-            rotateSpeed *= _velocityDecreaseRate;
-            if(rotateSpeed < _minRotationSpeed)
-            {
-                rotateSpeed = _minRotationSpeed;
-            }
-        }
-        else
-        {
-            rotateSpeed *= _velocityIncreaseRate;
-            if(rotateSpeed > _maxRotationSpeed)
-            {
-                rotateSpeed = _maxRotationSpeed;
-            }
-        }
+        
+        //transform.Rotate(rotateDir * rotateSpeed * rotationSpeedMultiplier * Time.deltaTime);
     }
 
     void Rock()
@@ -128,12 +95,10 @@ public class PlayerMovement : MonoBehaviour
     public void IncreaseSpeed(float increasedSpeed)
     {
         moveSpeed *= increasedSpeed;
-        _maxThrottleSpeed *= increasedSpeed;
     }
 
     public void DecreaseSpeed(float decreaseSpeed)
     {
         moveSpeed /= decreaseSpeed;
-        _maxThrottleSpeed /= decreaseSpeed;
     }
 }

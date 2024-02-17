@@ -5,6 +5,7 @@ using UnityEngine;
 public class CrewManager : MonoBehaviour
 {
     private int crewNum;
+    [SerializeField] Animator anim;
 
     // Start is called before the first frame update
     void Start()
@@ -26,5 +27,6 @@ public class CrewManager : MonoBehaviour
     public void IncreaseCrewNum(int num)
     {
         crewNum += num;
+        anim.Play("ship_upgrade");
     }
 }

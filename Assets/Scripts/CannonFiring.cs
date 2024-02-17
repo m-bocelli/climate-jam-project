@@ -11,6 +11,7 @@ public class CannonFiring : MonoBehaviour
 
     [Header("Stats"), SerializeField]
     private float force;
+    [SerializeField] int ammo;
     [SerializeField]
     private float timeToReload;
 
@@ -21,6 +22,9 @@ public class CannonFiring : MonoBehaviour
 
     [Header("References"), SerializeField]
     private CrewManager crewManager;
+
+
+    public int Ammo { get { return ammo; } set { ammo = value; } }
 
     // Start is called before the first frame update
     void Start()
@@ -41,9 +45,11 @@ public class CannonFiring : MonoBehaviour
             time += Time.deltaTime * (crewManager.GetCrewNum() / numOfCannons);
         }
 
-        if(Input.GetButton("Fire1") && readyToShoot)
+        if(Input.GetButton("Fire1") && readyToShoot && ammo > 0)
         {
+            Debug.Log("Camera has shaken!");
             ShootCannons();
+            ammo-= 2;
         }
 
         if(time >= timeToReload)
