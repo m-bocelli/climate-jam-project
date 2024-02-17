@@ -13,6 +13,10 @@ public class EnemyScript : MonoBehaviour
     private float damage;
     [SerializeField] GameObject dropItem;
 
+    [SerializeField] AudioSource enemySource;
+    [SerializeField] AudioClip[] enemyClips;
+
+    [SerializeField] AudioClip hitEnemyClip;
     //private Rigidbody rb;
 
 
@@ -24,6 +28,9 @@ public class EnemyScript : MonoBehaviour
     {
         //rb = this.gameObject.GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
+
+        int rngTiming = Random.Range(15, 30);
+        InvokeRepeating(nameof(PlayEnemySound), rngTiming, rngTiming);
     }
 
     // Update is called once per frame
@@ -41,10 +48,18 @@ public class EnemyScript : MonoBehaviour
     public void ReduceHealth(float damage)
     {
         health -= damage;
+        enemySource.PlayOneShot(hitEnemyClip);
+        CameraShake.instance.ShakeCamera(0.2f, 0.08f);
         Instantiate(dropItem, transform.position, Quaternion.identity);
         if(health <= 0)
         {
             Destroy(this.gameObject);
         }
+    }
+
+    public void PlayEnemySound()
+    {
+        int rng = Random.Range(0, enemyClips.Length);
+        enemySource.PlayOneShot(enemyClips[rng]);
     }
 }

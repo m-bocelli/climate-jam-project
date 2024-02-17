@@ -13,7 +13,14 @@ public class OilSpillScript : MonoBehaviour
 
     [SerializeField]
     private float timeToGrow;
+
+    [SerializeField]
+    private float timeToSpawn;
     private float timer;
+
+    private float spawnTimer;
+
+    public GameObject enemyPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +32,7 @@ public class OilSpillScript : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime;
+        spawnTimer += Time.deltaTime;
 
         this.transform.Translate(this.transform.forward * speed * Time.deltaTime);
 
@@ -33,6 +41,12 @@ public class OilSpillScript : MonoBehaviour
             timer = 0;
             timeToCaptureOil += 1f;
             this.transform.localScale += new Vector3(.5f, 0f, .5f);
+        }
+
+        if(spawnTimer >= timeToSpawn)
+        {
+            Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+            spawnTimer = 0;
         }
     }
 

@@ -23,6 +23,7 @@ public class CannonFiring : MonoBehaviour
     [Header("References"), SerializeField]
     private CrewManager crewManager;
 
+    [SerializeField] BoatSounds boatSounds;
 
     public int Ammo { get { return ammo; } set { ammo = value; } }
 
@@ -36,17 +37,19 @@ public class CannonFiring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(crewManager.GetCrewNum() == 1)
+        if(crewManager.GetCrewNum() <= 20)
         {
             time += Time.deltaTime;
         }
         else
         {
-            time += Time.deltaTime * (crewManager.GetCrewNum() / numOfCannons);
+            time += Time.deltaTime * (crewManager.GetCrewNum() / numOfCannons) / 20;
         }
 
         if(Input.GetButton("Fire1") && readyToShoot && ammo > 0)
         {
+            CameraShake.instance.ShakeCamera(0.1f, 0.2f);
+            boatSounds.CannonSound.PlayDelayed(0.1f);
             Debug.Log("Camera has shaken!");
             ShootCannons();
             ammo-= 2;

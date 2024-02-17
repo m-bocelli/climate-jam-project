@@ -120,3 +120,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   timeToGrow: 5
+  timeToSpawn: 50
+  enemyPrefab: {fileID: 4638242324551548277, guid: 31a493c08352f2647b5742c145a59e12,
+    type: 3}
