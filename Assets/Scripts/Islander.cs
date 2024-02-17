@@ -15,6 +15,10 @@ public class Islander : MonoBehaviour
     [SerializeField] LayerMask groundMask;
     [SerializeField] bool touchingGround = false;
 
+    [SerializeField] AudioSource helpSource;
+    [SerializeField] AudioClip[] helpClips;
+    int rngVoiceIdx;
+
     public GameObject Island { get { return island; } set { island = value; } }
 
     // Start is called before the first frame update
@@ -22,6 +26,10 @@ public class Islander : MonoBehaviour
     {
         travelSpeed *= Random.Range(2f, 5f);
         transform.parent = island.gameObject.transform;
+
+        int rngTiming = Random.Range(3, 5);
+        InvokeRepeating(nameof(PlayHelpSound), rngTiming, rngTiming);
+        rngVoiceIdx = Random.Range(0, helpClips.Length);
     }
 
     public void SetPlayerTarget(GameObject target)
@@ -59,6 +67,11 @@ public class Islander : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+    public void PlayHelpSound()
+    {
+        helpSource.PlayOneShot(helpClips[rngVoiceIdx]);
     }
 
     void DetectGround()

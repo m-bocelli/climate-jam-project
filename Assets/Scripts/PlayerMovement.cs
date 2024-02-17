@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] float forwardSpeedMultiplier = 1f;
     [SerializeField] float rotationSpeedMultiplier = 1f;
+    [SerializeField] BoatSounds boatSounds;
 
     public float ForwardSpeedMultiplier { get { return forwardSpeedMultiplier; } set { forwardSpeedMultiplier = value; } }
     public float RotationSpeedMultiplier { get { return rotationSpeedMultiplier; } set { rotationSpeedMultiplier = value; } }
@@ -100,5 +101,15 @@ public class PlayerMovement : MonoBehaviour
     public void DecreaseSpeed(float decreaseSpeed)
     {
         moveSpeed /= decreaseSpeed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.gameObject.layer == LayerMask.NameToLayer("Landform") 
+            && collision.collider.gameObject.name != "Plastic")
+        {
+            CameraShake.instance.ShakeCamera(0.1f, 0.08f);
+            boatSounds.HitWallSound.Play();
+        }
     }
 }

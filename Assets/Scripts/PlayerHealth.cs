@@ -4,28 +4,35 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField]
     private float health;
+    [SerializeField]
+    private float maxHealth;
     [SerializeField]
     private float timeForInvincibility;
     private float time;
     [SerializeField] Animator anim;
+    [SerializeField] BoatSounds boatSounds;
 
 
-    public float Health { get { return health; } }
-
+    public float Health { get { return health; } set { health = value; } }
+    public Animator Anim { get { return anim; } }
+    public BoatSounds BoatSounds { get { return boatSounds; } }
 
 
     // Start is called before the first frame update
     void Start()
     {
-
+        time = timeForInvincibility;
+        health = maxHealth;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if(health >= maxHealth)
+        {
+            health = maxHealth;
+        }
     }
 
     private void OnCollisionStay(Collision collision)
@@ -34,8 +41,11 @@ public class PlayerHealth : MonoBehaviour
 
         if(collision.gameObject.tag == "Enemy" && time >= timeForInvincibility)
         {
+            CameraShake.instance.ShakeCamera(0.5f, 0.6f);
             float damage = collision.gameObject.GetComponent<EnemyScript>().GetDamage();
             health -= damage;
+            boatSounds.CrashSound.Play();
+
             if(health <= 0)
             {
                 Debug.Log("You Lose!");

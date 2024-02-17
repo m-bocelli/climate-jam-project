@@ -125,8 +125,10 @@ public class GameMaster : MonoBehaviour
 
     public void GivePlayerUpgrade(GameObject player)
     {
-        int rng = Random.Range(0, 2);
+        int rng = Random.Range(0, 4);
         PlayerMovement playerMovement = player.GetComponentInParent<PlayerMovement>();
+        PlayerHealth playerHealth = player.GetComponentInParent<PlayerHealth>();
+        CannonFiring playerCannons = player.GetComponentInParent<CannonFiring>();
         Debug.Log(playerMovement);
         switch (rng)
         {
@@ -135,6 +137,12 @@ public class GameMaster : MonoBehaviour
                 break;
             case 1:
                 playerMovement.RotationSpeedMultiplier += 0.1f;
+                break;
+            case 2:
+                playerHealth.Health += 1;
+                break;
+            case 3:
+                playerCannons.Ammo += 1;
                 break;
         }
 

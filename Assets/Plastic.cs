@@ -9,6 +9,9 @@ public class Plastic : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            PlayerHealth playerHealth = other.GetComponent<PlayerHealth>();
+            playerHealth.Anim.Play("ship_upgrade");
+            playerHealth.BoatSounds.PlasticSound.Play();
             other.GetComponent<CannonFiring>().Ammo += 2;
             Destroy(gameObject);
         }
