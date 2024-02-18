@@ -8,7 +8,7 @@ public class StateMachine : MonoBehaviour
     [HideInInspector] public FullState FullState = new();
 
     public Animator ShipAnimator;
-    public PlayerMovement PMovement;
+    [HideInInspector] public PlayerMovement PMovement;
 
     [Header("State Speeds")]
     public float BySpeed = 0f;

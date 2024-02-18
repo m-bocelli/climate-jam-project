@@ -25,7 +25,7 @@ public class PlayerMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        speedText.text = "    Speed: " + playerMovement.GetMoveSpeed() + " " + playerMovement.GetAnchorDown();
+        speedText.text = "    Speed: " + playerMovement.GetSpeed();
         crewText.text = "    Crew: " + crewManager.GetCrewNum();
     }
 }
