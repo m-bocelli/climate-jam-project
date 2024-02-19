@@ -28,7 +28,7 @@ public class CameraController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPos, smoothing);
         transform.rotation = Quaternion.Slerp(transform.rotation, _playerTransform.rotation, rotSmoothing);
         transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f));
-        Debug.Log("Setting camera pos to : " + transform.position + " : playerPos:" + _playerTransform.position);
+        //Debug.Log("Setting camera pos to : " + transform.position + " : playerPos:" + _playerTransform.position);
        // UpdateFocusPos();
        // MoveToFocus();
     }

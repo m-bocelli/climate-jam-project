@@ -70,6 +70,7 @@ public class CannonFiring : MonoBehaviour
             GameObject newCannonBall = Instantiate(cannonBall, attackPoint.position, Quaternion.identity);
             newCannonBall.GetComponent<Rigidbody>().AddForce(force * attackPoint.forward, ForceMode.Impulse);
             newCannonBall.GetComponent<CannonBall>().Damage = cannonDamage;
+            boatSounds.ShootCannonSound();
             Destroy(newCannonBall, 3f);
         }
 

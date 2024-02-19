@@ -37,6 +37,9 @@ public class PlayerInteractionTrigger : MonoBehaviour
     [SerializeField]
     private GameObject captureSliderGameObject;
 
+    [SerializeField]
+    private BoatSounds boatSounds;
+
     private float timer;
 
     // Start is called before the first frame update
@@ -51,6 +54,26 @@ public class PlayerInteractionTrigger : MonoBehaviour
     void Update()
     {
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "IsladMedium")
+        {
+            boatSounds.CrewSound();
+        }
+        else if(other.gameObject.tag == "Oil")
+        {
+            boatSounds.OilSound();
+        }
+        else if(other.gameObject.tag == "Enemy")
+        {
+            boatSounds.EnemyApproachingSound();
+        }
+        else if(other.gameObject.tag == "OilRig")
+        {
+            boatSounds.OilRigSound();
+        }
     }
 
     private void OnTriggerStay(Collider other)
@@ -72,7 +95,6 @@ public class PlayerInteractionTrigger : MonoBehaviour
             timer = 0;
             captureSlider.value = 0;
             captureSliderGameObject.SetActive(false);
-
         }
     }
 
