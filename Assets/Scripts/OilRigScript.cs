@@ -31,7 +31,8 @@ public class OilRigScript : MonoBehaviour
         if (timer >= timeToSpawnOil)
         {
             timer = 0;
-            Instantiate(oilSpillPrefab, this.gameObject.transform.position, Quaternion.Euler(0, Random.Range(0f, 360f), 0));
+            Vector3 oilOffset = new Vector3(0, -8, 0f);
+            Instantiate(oilSpillPrefab, this.gameObject.transform.position + oilOffset, Quaternion.Euler(0, Random.Range(0f, 360f), 0));
         }
     }
 

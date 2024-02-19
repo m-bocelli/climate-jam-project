@@ -60,7 +60,8 @@ public class Islander : MonoBehaviour
             Debug.DrawRay(bc.bounds.center, -Vector2.up * (bc.bounds.extents.y + extraRaycastHeight), rayColor);
 
             transform.position = Vector3.MoveTowards(transform.position, targetPos, Time.deltaTime * travelSpeed);
-            if(Vector3.Distance(transform.position, playerTarget.transform.position) < deleteRange)
+            transform.LookAt(playerTarget.transform);
+            if (Vector3.Distance(transform.position, playerTarget.transform.position) < deleteRange)
             {
                 GameMaster.instance.savedIslanderCount++;
                 GameMaster.instance.GivePlayerUpgrade(playerTarget);

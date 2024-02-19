@@ -32,8 +32,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (SceneManager.GetActiveScene().name == "TitleScreen") return;
 
+        if (RotationSpeedMultiplier >= 2.5f) RotationSpeedMultiplier = 2.5f;
+        if (ForwardSpeedMultiplier >= 3) ForwardSpeedMultiplier = 3;
+
         Move();
         Turn();
+        Anchored();
     }
 
     void Move()
@@ -41,6 +45,24 @@ public class PlayerMovement : MonoBehaviour
         Vector3 direction = transform.forward;
         if (bounceOff) direction = -transform.forward;
         rb.AddForceAtPosition(direction * moveSpeed * ForwardSpeedMultiplier, rudder.position);
+    }
+
+    void Anchored()
+    {
+        if(Input.GetButtonDown("Jump"))
+        {
+            if(!boatSounds.koriSpeaker.isPlaying)
+                boatSounds.koriSpeaker.PlayOneShot(boatSounds.koriVoiceLines[0]);
+        }
+        if (Input.GetButtonUp("Jump"))
+        {
+            if (!boatSounds.koriSpeaker.isPlaying)
+                boatSounds.koriSpeaker.PlayOneShot(boatSounds.koriVoiceLines[1]);
+        }
+        if (Input.GetButton("Jump"))
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
 
     void Turn()
@@ -54,6 +76,11 @@ public class PlayerMovement : MonoBehaviour
     public void SetSpeed(float newSpeed) 
     {
         moveSpeed = newSpeed;
+    }
+
+    public void SetTorque(float newTorque)
+    {
+        torque = newTorque;
     }
 
     public float GetSpeed()
@@ -73,7 +100,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Landform"))
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Landform") && !collision.gameObject.CompareTag("Plastic"))
         {
             bounceOff = true;
             StartCoroutine(EndBounceOff());

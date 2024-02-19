@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - Oil
   - OilRig
+  - Plastic
   layers:
   - Default
   - TransparentFX

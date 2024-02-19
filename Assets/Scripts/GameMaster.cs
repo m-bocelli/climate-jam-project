@@ -35,12 +35,9 @@ public class GameMaster : MonoBehaviour
     {
         if (instance == null) return;
 
-        timer += Time.deltaTime;
-        timeSlider.value = timer / endTime;
-
-        if (timer >= endTime)
+        if(savedIslanderCount >= totalIslanders)
         {
-            Debug.Log("Game Ended");
+            SceneManager.LoadScene("WinScreen");
         }
     }
 

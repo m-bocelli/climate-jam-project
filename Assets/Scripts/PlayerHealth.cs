@@ -50,7 +50,7 @@ public class PlayerHealth : MonoBehaviour
             {
                 boatSounds.LoseSound();
                 Debug.Log("You Lose!");
-                GameMaster.instance.GoToScene("GameOver");
+                GameMaster.instance.GoToScene("LoseScreen");
             }
             else
             {
