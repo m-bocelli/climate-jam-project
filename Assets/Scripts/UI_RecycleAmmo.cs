@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UI_RecycleAmmo : MonoBehaviour
 {
@@ -16,6 +17,8 @@ public class UI_RecycleAmmo : MonoBehaviour
     // Update is called once per frame
     void UpdateSavedIslanders()
     {
+        if (SceneManager.GetActiveScene().name == "TitleScreen") return;
+
         recycleAmmoText.SetText(
            playerCannons.Ammo + "");
     }

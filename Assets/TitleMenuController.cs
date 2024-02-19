@@ -62,6 +62,10 @@ public class TitleMenuController : MonoBehaviour
         Screen.fullScreen = isFullScreen;
     }
 
+    public void PlayAgain()
+    {
+        SceneManager.LoadScene("SampleScene");
+    }
     public void QuitGame()
     {
         Application.Quit();
