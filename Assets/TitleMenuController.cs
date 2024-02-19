@@ -29,7 +29,7 @@ public class TitleMenuController : MonoBehaviour
 
     public void StartGame()
     {
-        SceneManager.LoadScene("SampleScene");
+        SceneManager.LoadScene("Dialogue");
     }
 
     public void OpenCreditsMenu()
