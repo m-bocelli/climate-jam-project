@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CannonFiring : MonoBehaviour
 {
@@ -37,7 +38,9 @@ public class CannonFiring : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(crewManager.GetCrewNum() <= 20)
+        if (SceneManager.GetActiveScene().name != "SampleScene") return;
+
+        if (crewManager.GetCrewNum() <= 20)
         {
             time += Time.deltaTime;
         }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PlayerInteractionTrigger : MonoBehaviour
@@ -45,6 +46,8 @@ public class PlayerInteractionTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (SceneManager.GetActiveScene().name != "SampleScene") return;
+
         timer = 0;
         captureSlider.value = 0;
         captureSliderGameObject.SetActive(false);
