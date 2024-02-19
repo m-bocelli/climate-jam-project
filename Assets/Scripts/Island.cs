@@ -8,9 +8,15 @@ public class Island : MonoBehaviour
     // public static event OnIslandDuplicate onIslandDuplicate;
     public int islandSize = 0;
     public int islandersOnIsland = 1;
+    public int treesOnIsland = 1;
     [SerializeField] BoxCollider bc;
+
     [SerializeField] GameObject islanderPrefab;
+    [SerializeField] GameObject[] islandDecalPrefabs;
+
     [SerializeField] Vector3 islanderOffset;
+    [SerializeField] Vector3 islandDecalOffset;
+    [SerializeField] Vector3 houseOffset;
 
     [SerializeField] List<GameObject> islanders = new List<GameObject>();
     bool startRemoveIslanders = false;
@@ -24,6 +30,24 @@ public class Island : MonoBehaviour
             GameObject islander = SpawnIslanders();
             islanders.Add(islander);
         }
+
+        for(int i = 0; i < treesOnIsland; i++)
+        {
+            SpawnIslandObjects();
+        }
+    }
+
+    public void SpawnIslandObjects()
+    {
+        Collider collider = gameObject.GetComponent<Collider>();
+        int rngIdx = Random.Range(0, islandDecalPrefabs.Length);
+
+        GameObject randomTree = islandDecalPrefabs[rngIdx];
+        Vector3 offset = islandDecalOffset;
+        if (rngIdx == 2) offset = houseOffset;
+        Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(collider, Vector3.zero, randomTree, "Islander") + offset;
+        GameObject tree = Instantiate(randomTree,spawnPos,Quaternion.identity);
+        tree.transform.parent = gameObject.transform;
     }
 
     public GameObject SpawnIslanders()

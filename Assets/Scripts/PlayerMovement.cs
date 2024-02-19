@@ -1,4 +1,4 @@
-using Unity.VisualScripting;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
 
     public float ForwardSpeedMultiplier = 1f;
     public float RotationSpeedMultiplier = 1f;
+
+    [SerializeField] bool bounceOff = false;
+    [SerializeField] BoatSounds boatSounds;
     
     void Awake()
     {
@@ -29,14 +32,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Move()
     {
-        rb.AddForceAtPosition(transform.forward * moveSpeed * ForwardSpeedMultiplier, rudder.position);
+        Vector3 direction = transform.forward;
+        if (bounceOff) direction = -transform.forward;
+        rb.AddForceAtPosition(direction * moveSpeed * ForwardSpeedMultiplier, rudder.position);
     }
 
     void Turn()
     {
         //Turn Ship
         rotateDir = new (0f, Input.GetAxis("Horizontal"), 0f);
-        transform.Rotate(rotateDir * torque * RotationSpeedMultiplier * Time.deltaTime);
+        rb.AddTorque(rotateDir * torque * RotationSpeedMultiplier * Time.deltaTime);
+        //transform.Rotate(rotateDir * torque * RotationSpeedMultiplier * Time.deltaTime);
     }
 
     public void SetSpeed(float newSpeed) 
@@ -57,5 +63,24 @@ public class PlayerMovement : MonoBehaviour
     public void DecreaseSpeed(float decreaseSpeed)
     {
         moveSpeed /= decreaseSpeed;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Landform"))
+        {
+            bounceOff = true;
+            StartCoroutine(EndBounceOff());
+            boatSounds.HitWallSound.Play();
+            CameraShake.instance.ShakeCamera(0.2f, 0.1f);
+            rb.AddForceAtPosition(-transform.forward * moveSpeed * ForwardSpeedMultiplier, rudder.position);
+        }
+    }
+
+
+    IEnumerator EndBounceOff()
+    {
+        yield return new WaitForSeconds(0.3f);
+        bounceOff = false;
     }
 }

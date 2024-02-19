@@ -73,7 +73,7 @@ public class ProceduralTileGeneration : MonoBehaviour
         oilRigCount = 0;
         while (oilRigCount < oilRigTotal)
         {
-            Vector3 offset = new Vector3(-8, 0, -8);
+            Vector3 offset = new Vector3(-8, 8, -8);
             Vector3 spawnPos = GameMaster.instance.GetRandomSpawnPos(seaCollider, offset, oilRigPrefab, "Landform");
             Instantiate(oilRigPrefab, spawnPos, Quaternion.identity, transform);
             oilRigCount++;
