@@ -10,6 +10,7 @@ public class FullState : IState
     void IState.Execute(StateMachine _sm)
     {
         if (Input.GetKeyDown(KeyCode.S)) {
+            _sm.PMovement.boatSounds.ShipSailSound(1);
             _sm.ChangeState(_sm.HalfState); 
         }
     }

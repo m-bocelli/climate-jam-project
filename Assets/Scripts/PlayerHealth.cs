@@ -48,11 +48,13 @@ public class PlayerHealth : MonoBehaviour
 
             if(health <= 0)
             {
+                boatSounds.LoseSound();
                 Debug.Log("You Lose!");
                 GameMaster.instance.GoToScene("GameOver");
             }
             else
             {
+                boatSounds.HurtSound();
                 Debug.Log("Health: " + health);
                 anim.Play("ship_hit_back");
             }

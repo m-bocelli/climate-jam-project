@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -16,7 +17,9 @@ public class PlayerMovement : MonoBehaviour
     public float RotationSpeedMultiplier = 1f;
 
     [SerializeField] bool bounceOff = false;
-    [SerializeField] BoatSounds boatSounds;
+    [SerializeField] public BoatSounds boatSounds;
+
+    public BoatSounds BoatSounds { get { return boatSounds; } set { boatSounds = value; } }
     
     void Awake()
     {
@@ -26,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+
+        if (SceneManager.GetActiveScene().name == "TitleScreen") return;
+
         Move();
         Turn();
     }
