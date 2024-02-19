@@ -6,6 +6,7 @@ public class CrewManager : MonoBehaviour
 {
     private int crewNum;
     [SerializeField] Animator anim;
+    [SerializeField] BoatSounds boatSounds;
 
     // Start is called before the first frame update
     void Start()

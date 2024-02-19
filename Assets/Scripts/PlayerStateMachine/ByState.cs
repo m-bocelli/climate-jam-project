@@ -10,8 +10,9 @@ public class ByState : IState
     void IState.Execute(StateMachine _sm)
     {
         if (Input.GetKeyDown(KeyCode.W)) {
-            _sm.ChangeState(_sm.HalfState);  
-        } 
+            _sm.PMovement.boatSounds.ShipSailSound(1);
+            _sm.ChangeState(_sm.HalfState);
+        }
     }
 
     void IState.Exit(StateMachine _sm)

@@ -3,6 +3,7 @@ using UnityEngine;
 public class HalfState : IState 
 {
     private IState.NextState nextState;
+
     void IState.Enter(StateMachine _sm)
     {
         _sm.PMovement.SetSpeed(_sm.HalfSpeed);
@@ -13,11 +14,14 @@ public class HalfState : IState
 
         if (Input.GetKeyDown(KeyCode.W)) {
             nextState = IState.NextState.Full;
+            _sm.PMovement.boatSounds.ShipSailSound(2);
             _sm.ChangeState(_sm.FullState);
+
         }
 
         if (Input.GetKeyDown(KeyCode.S)) {
             nextState = IState.NextState.By;
+            _sm.PMovement.boatSounds.ShipSailSound(0);
             _sm.ChangeState(_sm.ByState); 
         }
     }
