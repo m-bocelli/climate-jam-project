@@ -40,11 +40,11 @@ public class OilRigScript : MonoBehaviour
         if (oilRigDestroyed == true) return;
 
         health -= damage;
-        this.transform.localScale -= new Vector3(0f, 2f, 0f);
+        this.transform.localScale -= new Vector3(0f, 0.1f, 0f);
+        transform.position -= new Vector3(0f, 0.8f, 0f);
         if (health <= 0)
         {
             oilRigDestroyed = true;
-
         }
     }
 }

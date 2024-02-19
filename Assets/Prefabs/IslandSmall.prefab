@@ -121,10 +121,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   islandSize: 0
   islandersOnIsland: 3
+  treesOnIsland: 0
   bc: {fileID: 7132848169691214472}
   islanderPrefab: {fileID: 5268958140972249149, guid: 5f683169c30681f44845d93d932dece7,
     type: 3}
+  islandDecalPrefabs:
+  - {fileID: 2381190760068937659, guid: 4b1ff8a984e36f44f92206729591c5c4, type: 3}
+  - {fileID: 4918032109695996593, guid: f54e60a0164e25b44b8d68db7cfc7357, type: 3}
+  - {fileID: 6489840741160463210, guid: 7f655ffc18d38a244a1848e55a3168bf, type: 3}
   islanderOffset: {x: 0, y: 5, z: 0}
+  islandDecalOffset: {x: 0, y: 2.5, z: 0}
+  houseOffset: {x: 0, y: 5, z: 0}
   islanders: []
 --- !u!54 &8686053741718577819
 Rigidbody:
